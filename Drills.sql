@@ -13,7 +13,6 @@ FROM tbl_nutrition
 WHERE <= 600.00
 ;
 
-
 /* DRILL 4: */
 SELECT species_name 
 FROM tbl_nutrition
@@ -21,23 +20,52 @@ WHERE nutrition_id BETWEEN 2202 AND 2206
 ;
 
 
-
 /* DRILL 5: */
 SELECT species_name as 'Species Name:', nutrition_type as 'Nutrition Type:'
 FROM tbl_species
 ;
 
-	SELECT	
-	a1.species_name as 'Name:', a2.habitat_type as 'Habitat:', a2.habitat_cost as 'Monthly cost:',
-	a3.nutrition_type as 'Nutrition:', a3.nutrition_cost 'Monthly cost:'
-	FROM tbl_species a1
-	INNER JOIN tbl_habitat a2 ON a2.habitat_id = a1.species_habitat
-	INNER JOIN tbl_nutrition a3 ON a3.nutrition_id = a1.species_nutrition
-	WHERE species_name = 'ghost bat'
 
-/* DRILL 5: */
+/* DRILL 6: */
 SELECT a1.species_name, a1.species_care, a2.care_id, a2.care_specialist,
+a3.specialist_fname, a3.specialist_lname, a3.specialist_contact
 FROM tbl_species a1
 INNER JOIN tbl_care a2 ON a2.care_id = a1.species_care
-INNER JOIN tbl_ 
+INNER JOIN tbl_specialist a3 ON a3.specialist_id = a2.care_specialist
 WHERE species_name = 'penguin'
+;
+
+/* DRILL 7: */
+CREATE TABLE tbl_name (
+	name_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+	name_type VARCHAR(20) NOT NULL
+	);
+
+INSERT INTO tbl_name
+	(name_lname, name_fname)
+	VALUES
+	('alec, berken'),
+	('adrian, kraft'),
+	('tristan, feederson'),
+	('andrew, waugh')
+	;
+
+SELECT * FROM tbl_name;
+
+
+CREATE TABLE tbl_contact (
+	contact_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+	name_type VARCHAR(20) NOT NULL
+	);
+
+INSERT INTO tbl_contact
+	(contact_phone, contact_address)
+	VALUES
+	(' 100-200-3000', ' a'),
+	(' 100-200-3000', ' a'),
+	(' 100-200-3000', ' a'),
+	(' 100-200-3000', ' a'),
+	(' 100-200-3000', ' a')
+	;
+
+SELECT * FROM tbl_contact;
