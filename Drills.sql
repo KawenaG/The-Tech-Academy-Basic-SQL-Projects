@@ -38,34 +38,45 @@ WHERE species_name = 'penguin'
 /* DRILL 7: */
 CREATE TABLE tbl_name (
 	name_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
-	name_type VARCHAR(20) NOT NULL
+	name_first VARCHAR(50) NOT NULL,
+	name_last VARCHAR(50) NOT NULL 
 	);
 
 INSERT INTO tbl_name
-	(name_lname, name_fname)
+	(name_first, name_last)
 	VALUES
 	('alec, berken'),
 	('adrian, kraft'),
 	('tristan, feederson'),
-	('andrew, waugh')
+	('andrew, waugh'),
+	('peyton, jacobs')
 	;
 
 SELECT * FROM tbl_name;
 
-
 CREATE TABLE tbl_contact (
 	contact_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
-	name_type VARCHAR(20) NOT NULL
+	contact_phone VARCHAR(50) NOT NULL,
+	contact_address VARCHAR(50) NOT NULL
 	);
 
 INSERT INTO tbl_contact
 	(contact_phone, contact_address)
 	VALUES
-	(' 100-200-3000', ' a'),
-	(' 100-200-3000', ' a'),
-	(' 100-200-3000', ' a'),
-	(' 100-200-3000', ' a'),
-	(' 100-200-3000', ' a')
+	('100-200-3000', 'fake address1'),
+	('100-200-3000', 'fake address2'),
+	('100-200-3000', 'fake address3'),
+	('100-200-3000', 'fake address4'),
+	('100-200-3000', 'fake address5')
 	;
 
 SELECT * FROM tbl_contact;
+
+CREATE TABLE Customers (
+	name_id int NOT NULL, 
+	name_first VARCHAR(50) NOT NULL,
+	name_last VARCHAR(50) NOT NULL
+	contact_id int (name_id),
+	PRIMARY KEY (name_id),
+	FOREIGN KEY (contact_id) REFERENCES contact(name_id)
+	);
