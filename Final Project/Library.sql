@@ -1,11 +1,15 @@
 USE Library
 
+DROP TABLE Book_Authors, Book_Copies, Book_Loans, Books, Borrower, Library_Branch, Publisher
+
 --/Library_Branch/--
 CREATE TABLE Library_Branch (
 	BranchID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	BranchName VARCHAR(50) NOT NULL,
 	Address VARCHAR(50) NOT NULL
 );
+
+SET IDENTITY_INSERT Library_Branch ON
 
 INSERT INTO Library_Branch
 	(BranchID, BranchName, Address)
@@ -15,20 +19,23 @@ INSERT INTO Library_Branch
 	('03', 'North Bend', '96 Wayne St. Granger, WA'),
 	('04', 'Eastville', '237 NE. Walnut Drive Barrington, WA')
 ;
+SET IDENTITY_INSERT Library_Branch OFF
 
 SELECT * FROM Library_Branch;
 
 --/ Publisher/--
 CREATE TABLE Publisher (
-	PublisherName INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+	PublisherName VARCHAR(50) PRIMARY KEY NOT NULL,
 	Address VARCHAR(50) NOT NULL,
 	Phone VARCHAR(50) NOT NULL
 );
 
+DROP TABLE Publisher
+
 INSERT INTO Publisher
 	(PublisherName, Address, Phone)
 	VALUES
-	('Allen & Unwin', '96 Creek St. Maplewood, CA 07040', '808-911-0000'),
+	('Allen and Unwin', '96 Creek St. Maplewood, CA 07040', '808-911-0000'),
 	('Little, Brown and Company', '918 Beech Street South Windsor, CT 06074', '808-123-4576'),
 	('W.W. Norton and Company', '99 West Liberty Street Joliet, IL 60435', '331-578-9210'),
 	('Houghton Mifflin Harcourt', '181A Poor House St. New Berlin, WI 53151', '235-667-9781'),
@@ -55,7 +62,7 @@ SELECT * FROM Publisher;
 
 --/ Books/--
 CREATE TABLE Books (
-	BookID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+	BookID VARCHAR(50) PRIMARY KEY NOT NULL,
 	Title VARCHAR(50) NOT NULL,
 	PublisherName VARCHAR(50) NOT NULL
 );
@@ -119,8 +126,8 @@ INSERT INTO Book_Authors
 ;
 
 SELECT * FROM Book_Authors;
---/ Book Copies/--
 
+--/ Book Copies/--
 CREATE TABLE Book_Copies (
 	BookID VARCHAR(50) NOT NULL,
 	BranchID VARCHAR(50) NOT NULL,
@@ -215,11 +222,12 @@ SELECT * FROM Book_Loans;
 
 --/ Borrower/--
 CREATE TABLE Borrower (
-	CardNo INT PRIMARY KEY NOT NULL IDENTITY (1,1),
+	CardNo VARCHAR(50) PRIMARY KEY NOT NULL,
 	Name VARCHAR(50) NOT NULL,
 	Address VARCHAR(50) NOT NULL,
 	Phone VARCHAR(50) NOT NULL
 );
+
 
 INSERT INTO Borrower
 	(CardNo, Name, Address, Phone)
@@ -235,3 +243,7 @@ INSERT INTO Borrower
 ;
 
 SELECT * FROM Borrower;
+
+
+
+
